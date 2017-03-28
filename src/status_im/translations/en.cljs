@@ -272,6 +272,7 @@
    :confirm-transactions                  {:one   "Confirm transaction"
                                            :other "Confirm {{count}} transactions"
                                            :zero  "No transactions"}
+   :pending-transactions                  "Pending transactions"
    :status                                "Status"
    :pending-confirmation                  "Pending confirmation"
    :recipient                             "Recipient"

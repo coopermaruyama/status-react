@@ -1,18 +1,30 @@
 (ns status-im.transactions.styles
-  (:require [status-im.components.styles :refer [color-gray
-                                                 color-black]]))
+  (:require-macros [status-im.utils.styles :refer [defstyle]])
+  (:require [status-im.components.styles :as st]
+            [status-im.utils.platform :as p]))
+
+(def transactions-toolbar-background st/color-dark-blue-1)
 
 (def transactions-screen
   {:flex 1
    :backgroundColor "#828b92"})
 
-(def transactions-toolbar
-  {:backgroundColor "#828b92"
-   :elevation 0})
+(defstyle toolbar-title-container
+  {:flex           1
+   :flex-direction :row
+   :align-self     :stretch
+   :android        {:padding-left 30}
+   :ios            {:align-items :center}})
 
 (def toolbar-title-text
-  {:color :white
-   :fontSize 16})
+  {:color     st/color-white
+   :font-size 17})
+
+(def toolbar-title-count
+  {:color       st/color-white
+   :font-size   17
+   :opacity     0.2
+   :margin-left 8})
 
 (def carousel-page-style
   {})
@@ -85,12 +97,12 @@
 
 (def transaction-info-title
   {:textAlign :right
-   :color color-gray
+   :color st/color-gray
    :fontSize 14
    :lineHeight 20})
 
 (def transaction-info-value
-  {:color color-black
+  {:color st/color-black
    :fontSize 14
    :lineHeight 20
 })
