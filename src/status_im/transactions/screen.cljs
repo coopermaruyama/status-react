@@ -2,21 +2,22 @@
   (:require-macros [status-im.utils.views :refer [defview]])
   (:require [re-frame.core :refer [subscribe dispatch]]
             [status-im.components.react :refer [view
+                                                list-view
+                                                list-item
                                                 text
                                                 image
                                                 icon
-                                                scroll-view
                                                 touchable-highlight
                                                 touchable-opacity]]
             [status-im.components.styles :refer [icon-ok
                                                  icon-close]]
-            [status-im.components.carousel.carousel :refer [carousel]]
             [status-im.components.status-bar :refer [status-bar]]
             [status-im.components.toolbar-new.actions :as act]
             [status-im.components.toolbar-new.view :refer [toolbar]]
             [status-im.components.text-field.view :refer [text-field]]
-            [status-im.transactions.views.transaction-page :refer [transaction-page]]
+            [status-im.transactions.views.list-item :as transactions-list-item]
             [status-im.transactions.styles :as st]
+            [status-im.utils.listview :as lw]
             [status-im.i18n :refer [label label-pluralize]]
             [clojure.string :as s]))
 
@@ -37,14 +38,9 @@
   [view st/transactions-screen
    [status-bar {:type :transparent}]
    [toolbar-view transactions]
-   [view st/carousel-container
-    [carousel {:pageStyle st/carousel-page-style
-               :gap       8
-               :sneak     16
-               :count     (count transactions)}
-     (when transactions
-       (for [transaction transactions]
-         [transaction-page transaction]))]]
+   [list-view {:dataSource (lw/to-datasource transactions)
+               :renderRow  (fn [row _ _]
+                             (list-item [transactions-list-item/view row]))}]
    [view st/form-container
     [text-field
      {:editable          true
