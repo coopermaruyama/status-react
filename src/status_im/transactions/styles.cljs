@@ -5,7 +5,7 @@
 (def transactions-toolbar-background st/color-dark-blue-1)
 
 (def transactions-screen
-  {:flex 1
+  {:flex             1
    :background-color st/color-dark-blue-2})
 
 (defstyle toolbar-title-container
@@ -25,13 +25,31 @@
    :opacity     0.2
    :margin-left 8})
 
-(def form-container
-  {:flex 1
-   :paddingLeft 16})
+(def transactions-list
+  {:flex 1})
 
-(def password-style
-  {:color     :white
-   :font-size 12})
+(def password-container
+  {:margin-bottom 24
+   :padding-left  16})
+
+(def password-title
+  {:color         st/color-white
+   :font-size     15
+   :margin-bottom 16})
+
+(def password-input-wrapper
+  {:position       :relative
+   :height         56
+   :padding-top    0
+   :padding-bottom 0
+   :margin-bottom  4})
+
+(def password-input
+  {:color          :white
+   :height         52
+   :padding-top    16
+   :padding-bottom 16
+   :font-size      16})
 
 ;; details
 

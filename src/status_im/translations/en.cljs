@@ -275,6 +275,7 @@
                                            :zero  "No transactions"}
    :transaction                           "Transaction"
    :pending-transactions                  "Pending transactions"
+   :enter-password-transactions           "Enter your password to confirm the transactions"
    :status                                "Status"
    :pending-confirmation                  "Pending confirmation"
    :recipient                             "Recipient"
