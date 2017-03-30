@@ -50,7 +50,7 @@
    confirmed?        [:get-in [:transaction-details-ui-props :confirmed?]]]
   {:component-will-unmount #(dispatch [:set-in [:transaction-details-ui-props :confirmed?] false])}
   [view st/transactions-screen
-   [status-bar/status-bar {:type :dark-blue}]
+   [status-bar/status-bar {:type :transparent}]
    [toolbar-view]
    [transactions-list-item/view transaction]
    [details transaction]
