@@ -34,7 +34,8 @@
   (let [eth-value      (.fromWei js/Web3.prototype value "ether")
         value          (str (i18n/label-number eth-value) " ETH")
         recipient-name (or (:name recipient) to)]
-    [rn/view {:style st/item}
-     [item-image recipient]
-     [item-info recipient-name value]
-     [deny-btn]]))
+    [rn/touchable-highlight {:on-press #(dispatch [:navigate-to-modal :transaction-details transaction])}
+     [rn/view {:style st/item}
+      [item-image recipient]
+      [item-info recipient-name value]
+      [deny-btn]]]))

@@ -22,6 +22,7 @@
 (def color-light-gray "#EEF2F5")
 (def color-red "red")
 (def color-light-red "#e86363")
+(def color-light-red2 "#f47979")
 
 (def color-separator "#D6D6D6")
 

@@ -32,3 +32,24 @@
 (def password-style
   {:color     :white
    :font-size 12})
+
+;; details
+
+(def details-item
+  {:margin-top   10
+   :padding-left 16
+   :font-size    15})
+
+(def details-item-title
+  {:width        80
+   :margin-right 24
+   :color        st/color-white
+   :opacity      0.2})
+
+(def details-item-name-content
+  {:color st/color-light-blue})
+
+(def details-data
+  {:margin-top       10
+   :padding          16
+   :background-color st/color-dark-blue-3})
