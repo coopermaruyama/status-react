@@ -71,3 +71,31 @@
   {:margin-top       10
    :padding          16
    :background-color st/color-dark-blue-3})
+
+;; success
+
+(def success-screen
+  {:flex             1
+   :background-color st/color-dark-blue-2})
+
+(def success-screen-content-container
+  {:flex            1
+   :align-items     :center
+   :justify-content :center})
+
+(def success-icon-container
+  {:background-color st/color-light-blue
+   :border-radius    100
+   :height           133
+   :width            133
+   :justify-content  :center
+   :align-items      :center})
+
+(def success-icon
+  {:height 40
+   :width  54})
+
+(def success-text
+  {:font-size  17
+   :color      st/color-light-blue3
+   :margin-top 26})

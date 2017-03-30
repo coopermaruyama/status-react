@@ -22,6 +22,7 @@
             [status-im.accounts.screen :refer [accounts]]
             [status-im.transactions.screen :refer [confirm]]
             [status-im.transactions.screens.transaction-details :refer [transaction-details]]
+            [status-im.transactions.screens.confirmation-success :refer [confirmation-success]]
             [status-im.chats-list.screen :refer [chats-list]]
             [status-im.new-chat.screen :refer [new-chat]]
             [status-im.new-group.screen-private :refer [new-group
@@ -134,6 +135,7 @@
                                       :qr-code-view qr-code-view
                                       :confirm confirm
                                       :transaction-details transaction-details
+                                      :confirmation-success confirmation-success
                                       :contact-list-modal contact-list-modal)]
                       [component])]])]))))})))
 

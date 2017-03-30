@@ -273,6 +273,9 @@
    :confirm-transactions                  {:one   "Confirm transaction"
                                            :other "Confirm {{count}} transactions"
                                            :zero  "No transactions"}
+   :transactions-confirmed                {:one   "Transaction confirmed"
+                                           :other "{{count}} transactions confirmed"
+                                           :zero  "No transactions confirmed"}
    :transaction                           "Transaction"
    :pending-transactions                  "Pending transactions"
    :enter-password-transactions           "Enter your password to confirm the transactions"
@@ -288,6 +291,7 @@
    :max-fee                               "Max. fee"
    :gas-price                             "Gas price"
    :data                                  "Data"
+   :got-it                                "Got it"
 
    ;:webview
    :web-view-error                        "oops, error"})
