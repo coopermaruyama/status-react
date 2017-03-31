@@ -24,12 +24,14 @@
     recipient-name]
    [rn/text {:style st/item-info-amount} value]])
 
-(defn deny-btn []
-  [rn/view {:style st/item-deny-btn}
+(defn deny-btn [transaction-id on-deny]
+  [rn/touchable-highlight {:on-press #(do (dispatch [:deny-transaction transaction-id])
+                                          (when on-deny (on-deny)))}
+   [rn/view {:style st/item-deny-btn}
    [rn/image {:source {:uri :icon_close_white}
-              :style st/item-deny-btn-icon}]])
+              :style st/item-deny-btn-icon}]]])
 
-(defview view [{:keys [to value] :as transaction}]
+(defview view [{:keys [to value id] :as transaction} on-deny]
   [recipient [:contact-by-address to]]
   (let [eth-value      (.fromWei js/Web3.prototype value "ether")
         value          (str (i18n/label-number eth-value) " ETH")
@@ -37,4 +39,4 @@
     [rn/view {:style st/item}
      [item-image recipient]
      [item-info recipient-name value]
-     [deny-btn]]))
+     [deny-btn id on-deny]]))

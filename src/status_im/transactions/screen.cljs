@@ -25,7 +25,8 @@
 (defn toolbar-view [transactions]
   [toolbar
    {:background-color st/transactions-toolbar-background
-    :nav-action       (act/close-white #(dispatch [:deny-transactions]))
+    :nav-action       (act/close-white #(do (dispatch [:deny-transactions])
+                                            (dispatch [:navigate-back])))
     :custom-content   [view {:style st/toolbar-title-container}
                        [text {:style st/toolbar-title-text}
                         (label :t/pending-transactions)]

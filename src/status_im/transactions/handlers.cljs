@@ -56,8 +56,7 @@
         (dispatch [::remove-pending-messages messages-ids])
         (dispatch [::remove-transactions ids])
         (doseq [id ids]
-          (dispatch [::discard-transaction id]))
-        (dispatch [:navigate-back])))))
+          (dispatch [::discard-transaction id]))))))
 
 (register-handler :deny-transaction
   (u/side-effect!
@@ -80,9 +79,6 @@
         (update :transactions-queue #(apply dissoc % hashes)))))
 
 (register-handler ::remove-transaction
-  (after (fn [{:keys [modal]}]
-           (when (= :confirm modal)
-             (dispatch [:navigate-back]))))
   (fn [db [_ hash]]
     (-> db
         (update :transactions dissoc hash)

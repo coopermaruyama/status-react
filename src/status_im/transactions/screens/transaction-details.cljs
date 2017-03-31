@@ -22,7 +22,7 @@
 (defn toolbar-view []
   [toolbar/toolbar
    {:background-color st/transactions-toolbar-background
-    :nav-action       (act/close-white #(dispatch [:deny-transactions]))
+    :nav-action       (act/back-white #(dispatch [:navigate-to-modal :confirm]))
     :custom-content   [view {:style st/toolbar-title-container}
                        [text {:style st/toolbar-title-text}
                         (i18n/label :t/transaction)]]}])
@@ -56,7 +56,7 @@
    [status-bar/status-bar {:type :transparent}]
    [toolbar-view]
    [scroll-view st/details-screen-content-container
-    [transactions-list-item/view transaction]
+    [transactions-list-item/view transaction #(dispatch [:navigate-to-modal :confirm])]
     [details transaction]]
    (when confirmed? [password-form/view 1])
    (let [confirm-text (if confirmed?
