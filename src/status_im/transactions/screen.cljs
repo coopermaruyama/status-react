@@ -32,6 +32,12 @@
                        [text {:style st/toolbar-title-count}
                         (count transactions)]]}])
 
+(defn render-row-fn [row _ _]
+  (list-item
+   [touchable-highlight {:on-press #(dispatch [:navigate-to-modal :transaction-details row])}
+    [view
+     [transactions-list-item/view row]]]))
+
 (defview confirm []
   [transactions [:transactions]
    {:keys [password]} [:get :confirm-transactions]
@@ -41,9 +47,9 @@
    [status-bar {:type :transparent}]
    [toolbar-view transactions]
    [view {:style st/transactions-screen-content-container}
-    [list-view {:style        st/transactions-list
-               :dataSource   (lw/to-datasource transactions)
-               :renderRow    (fn [row _ _] (list-item [transactions-list-item/view row]))}]
+    [list-view {:style      st/transactions-list
+                :dataSource (lw/to-datasource transactions)
+                :renderRow  render-row-fn}]
     (when confirmed?
       [password-form/view (count transactions)])]
    (let [confirm-text (if confirmed?
