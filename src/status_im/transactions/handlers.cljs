@@ -30,6 +30,14 @@
              :wrong-password? false)
       (assoc-in [:confirm-transactions :password] "")))
 
+(defmethod nav/preload-data! :transaction-details
+  [db [_ _ transaction]]
+  (-> db
+      (assoc :selected-transaction transaction
+             :wrong-password-counter 0
+             :wrong-password? false)
+      (assoc-in [:confirm-transactions :password] "")))
+
 (defn on-unlock
   [ids password]
   (dispatch [:set :wrong-password? false])
