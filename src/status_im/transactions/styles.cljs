@@ -8,6 +8,10 @@
   {:flex             1
    :background-color st/color-dark-blue-2})
 
+(def transactions-screen-content-container
+  {:flex            1
+   :justify-content :space-between})
+
 (defstyle toolbar-title-container
   {:flex           1
    :flex-direction :row
@@ -28,49 +32,42 @@
 (def transactions-list
   {:flex 1})
 
-(def password-container
-  {:margin-bottom 24
-   :padding-left  16})
-
-(def password-title
-  {:color         st/color-white
-   :font-size     15
-   :margin-bottom 16})
-
-(def password-input-wrapper
-  {:position       :relative
-   :height         56
-   :padding-top    0
-   :padding-bottom 0
-   :margin-bottom  4})
-
-(def password-input
-  {:color          :white
-   :height         52
-   :padding-top    16
-   :padding-bottom 16
-   :font-size      16})
-
 ;; details
 
+(def details-screen-content-container
+  {:flex        1
+   :padding-top 8})
+
 (def details-item
-  {:margin-top   10
-   :padding-left 16
-   :font-size    15})
+  {:margin-top     10
+   :padding-left   16
+   :flex-direction :row})
 
 (def details-item-title
   {:width        80
    :margin-right 24
+   :font-size    15
    :color        st/color-white
    :opacity      0.2})
 
+(defn details-item-content [name?]
+  {:font-size 15
+   :color     (if name? st/color-light-blue st/color-white)})
+
 (def details-item-name-content
-  {:color st/color-light-blue})
+  {:font-size 15
+   :color     st/color-light-blue})
 
 (def details-data
-  {:margin-top       10
+  {:margin-top       16
    :padding          16
+   :padding-right    48
    :background-color st/color-dark-blue-3})
+
+(def details-data-content
+  {:font-size  15
+   :color      st/color-white
+   :margin-top 8})
 
 ;; success
 

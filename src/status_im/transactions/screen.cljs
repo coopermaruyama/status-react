@@ -10,15 +10,13 @@
                                                 touchable-highlight
                                                 touchable-opacity]]
             [status-im.components.styles :refer [icon-ok
-                                                 icon-close
-                                                 color-light-blue
-                                                 color-light-red2]]
+                                                 icon-close]]
             [status-im.components.confirm-button :refer [confirm-button]]
             [status-im.components.status-bar :refer [status-bar]]
             [status-im.components.toolbar-new.actions :as act]
             [status-im.components.toolbar-new.view :refer [toolbar]]
-            [status-im.components.text-field.view :refer [text-field]]
             [status-im.transactions.views.list-item :as transactions-list-item]
+            [status-im.transactions.views.password-form :as password-form]
             [status-im.transactions.styles :as st]
             [status-im.utils.listview :as lw]
             [status-im.i18n :refer [label label-pluralize]]
@@ -34,24 +32,6 @@
                        [text {:style st/toolbar-title-count}
                         (count transactions)]]}])
 
-(defview password-form []
-  [wrong-password? [:wrong-password?]]
-  [view st/password-container
-   [text {:style st/password-title} (label :t/enter-password-transactions)]
-   [text-field
-    {:editable               true
-     :secure-text-entry      true
-     :label-hidden?          true
-     :error                  (when wrong-password? (label :t/wrong-password))
-     :error-color            color-light-red2
-     :placeholder            (label :t/password)
-     :placeholder-text-color "#ffffff33"
-     :line-color             color-light-blue
-     :focus-line-height      2
-     :wrapper-style          st/password-input-wrapper
-     :input-style            st/password-input
-     :on-change-text         #(dispatch [:set-in [:confirm-transactions :password] %])}]])
-
 (defview confirm []
   [transactions [:transactions]
    {:keys [password]} [:get :confirm-transactions]
@@ -60,10 +40,12 @@
   [view st/transactions-screen
    [status-bar {:type :transparent}]
    [toolbar-view transactions]
-   [list-view {:style        st/transactions-list
+   [view {:style st/transactions-screen-content-container}
+    [list-view {:style        st/transactions-list
                :dataSource   (lw/to-datasource transactions)
-               :renderRow    (fn [row _ _] (list-item [transactions-list-item/view row]))
-               :renderFooter (fn [] (when confirmed? (list-item [password-form])))}]
+               :renderRow    (fn [row _ _] (list-item [transactions-list-item/view row]))}]
+    (when confirmed?
+      [password-form/view (count transactions)])]
    (let [confirm-text (if confirmed?
                         (label :t/confirm)
                         (label-pluralize (count transactions) :t/confirm-transactions))

@@ -13,6 +13,7 @@
 (def color-gray6 "#212121")
 (def color-steel "#838b91")
 (def color-white "white")
+(def color-white-transparent "#ffffff66")
 (def color-light-blue "#628fe3")
 (def color-light-blue-transparent "#628fe333")
 (def color-light-blue2 "#eff3fc")

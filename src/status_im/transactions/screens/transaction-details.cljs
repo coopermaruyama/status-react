@@ -4,6 +4,7 @@
             [status-im.components.react :refer [view
                                                 list-view
                                                 list-item
+                                                scroll-view
                                                 text
                                                 image
                                                 icon
@@ -14,6 +15,7 @@
             [status-im.components.toolbar-new.actions :as act]
             [status-im.components.toolbar-new.view :as toolbar]
             [status-im.transactions.views.list-item :as transactions-list-item]
+            [status-im.transactions.views.password-form :as password-form]
             [status-im.transactions.styles :as st]
             [status-im.i18n :as i18n]))
 
@@ -27,12 +29,12 @@
 (defn detail-item [title content name?]
   [view {:style st/details-item}
    [text {:style st/details-item-title} title]
-   [text (when name? {:style st/details-item-name-content}) content]])
+   [text {:style (st/details-item-content name?)} content]])
 
 (defn detail-data [content]
   [view {:style st/details-data}
    [text {:style st/details-item-title} (i18n/label :t/data)]
-   [text content]])
+   [text {:style st/details-data-content} "0xf8sd9fsd98f9dsf98dsf90xf8sd9fsd98f9dsf98dsf90xf8sd9fsd98f9dsf98dsf90xf8sd9fsd98f9dsf98dsf90xf8sd9fsd98f9dsf98dsf90xf8sd9fsd98f9dsdsf9"]])
 
 (defview details [{:keys [from to data gas gas-price] :as transaction}]
   [sender    [:contact-by-address from]
@@ -52,8 +54,10 @@
   [view st/transactions-screen
    [status-bar/status-bar {:type :transparent}]
    [toolbar-view]
-   [transactions-list-item/view transaction]
-   [details transaction]
+   [scroll-view st/details-screen-content-container
+    [transactions-list-item/view transaction]
+    [details transaction]]
+   (when confirmed? [password-form/view 1])
    (let [confirm-text (if confirmed?
                         (i18n/label :t/confirm)
                         (i18n/label-pluralize 1 :t/confirm-transactions))
