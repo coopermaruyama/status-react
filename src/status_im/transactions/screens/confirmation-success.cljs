@@ -12,7 +12,7 @@
    [status-bar/status-bar {:type :transparent}]
    [rn/view {:style st/success-screen-content-container}
     [rn/view {:style st/success-icon-container}
-     [rn/image {:source {:uri :icon_ok}
+     [rn/image {:source {:uri :icon_ok_white}
                 :style  st/success-icon}]]
     [rn/view
      [rn/text {:style st/success-text}

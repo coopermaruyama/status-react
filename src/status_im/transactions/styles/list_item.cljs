@@ -34,8 +34,8 @@
   {:margin-left 16})
 
 (def item-deny-btn-icon
-  {:width  12
-   :height 12})
+  {:width  24
+   :height 24})
 
 (def photo
   {:borderRadius 100
