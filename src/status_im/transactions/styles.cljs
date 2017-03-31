@@ -30,7 +30,8 @@
    :margin-left 8})
 
 (def transactions-list
-  {:flex 1})
+  {:flex 1
+   :padding-vertical 8})
 
 ;; details
 
