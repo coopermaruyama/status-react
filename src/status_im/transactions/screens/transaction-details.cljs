@@ -48,7 +48,7 @@
    [detail-item (i18n/label :t/gas-price) "0.02 per million gas" false]
    [detail-data data]])
 
-(defview transaction-details [transaction]
+(defview transaction-details [{:keys [id] :as transaction}]
   [{:keys [password]} [:get :confirm-transactions]
    confirmed?        [:get-in [:transaction-details-ui-props :confirmed?]]]
   {:component-will-unmount #(dispatch [:set-in [:transaction-details-ui-props :confirmed?] false])}
@@ -63,6 +63,6 @@
                         (i18n/label :t/confirm)
                         (i18n/label-pluralize 1 :t/confirm-transactions))
          confirm-fn   (if confirmed?
-                        #(dispatch [:accept-transactions password])
+                        #(dispatch [:accept-transaction password id])
                         #(dispatch [:set-in [:transaction-details-ui-props :confirmed?] true]))]
      [confirm-button/confirm-button confirm-text confirm-fn])])

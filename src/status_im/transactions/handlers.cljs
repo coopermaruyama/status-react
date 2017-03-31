@@ -47,6 +47,11 @@
       (let [ids              (keys transactions)]
         (on-unlock ids password)))))
 
+(register-handler :accept-transaction
+  (u/side-effect!
+   (fn [{:keys [transactions]} [_ password id]]
+     (on-unlock (list id) password))))
+
 (register-handler :deny-transactions
   (u/side-effect!
     (fn [{:keys [transactions]}]
@@ -129,7 +134,7 @@
 
 (register-handler :transaction-completed
   (u/side-effect!
-    (fn [{:keys [transactions]} [_ {:keys [id response]}]]
+    (fn [{:keys [transactions modal]} [_ {:keys [id response]}]]
       (let [{:keys [hash error] :as parsed-response} (t/json->clj response)
             {:keys [message-id]} (transactions id)]
         (log/debug :parsed-response parsed-response)
@@ -139,7 +144,11 @@
                                                     :hash       hash
                                                     :message-id message-id}])
                 (dispatch [::check-completed-transaction!
-                           {:message-id message-id}]))
+                           {:message-id message-id}])
+                (case modal
+                  :confirm             (dispatch [:navigate-back])
+                  :transaction-details (dispatch [:navigate-to-modal :confirm])
+                  nil))
             (dispatch [::remove-transaction id])))))))
 
 (register-handler ::add-transactions-hash
