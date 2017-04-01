@@ -1,16 +1,10 @@
-(ns status-im.transactions.styles
+(ns status-im.transactions.styles.screens
   (:require-macros [status-im.utils.styles :refer [defstyle]])
   (:require [status-im.components.styles :as st]))
 
+;; common
+
 (def transactions-toolbar-background st/color-dark-blue-1)
-
-(def transactions-screen
-  {:flex             1
-   :background-color st/color-dark-blue-2})
-
-(def transactions-screen-content-container
-  {:flex            1
-   :justify-content :space-between})
 
 (defstyle toolbar-title-container
   {:flex           1
@@ -29,11 +23,21 @@
    :opacity     0.2
    :margin-left 8})
 
+;; pending-transactions
+
+(def transactions-screen
+  {:flex             1
+   :background-color st/color-dark-blue-2})
+
+(def transactions-screen-content-container
+  {:flex            1
+   :justify-content :space-between})
+
 (def transactions-list
   {:flex 1
    :padding-vertical 8})
 
-;; details
+;; transaction-details
 
 (def details-screen-content-container
   {:flex        1
@@ -70,7 +74,7 @@
    :color      st/color-white
    :margin-top 8})
 
-;; success
+;; confirmation-success
 
 (def success-screen
   {:flex             1

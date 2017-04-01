@@ -22,7 +22,7 @@
 ;; && :navigation-replace                                 <- on success
 
 
-(defmethod nav/preload-data! :confirm
+(defmethod nav/preload-data! :pending-transactions
   [{:keys [transactions-queue] :as db} _]
   (-> db
       (assoc :transactions transactions-queue
@@ -128,7 +128,7 @@
         (status/discard-transaction id)))))
 
 (register-handler ::transaction-queued
-  (after #(dispatch [:navigate-to-modal :confirm]))
+  (after #(dispatch [:navigate-to-modal :pending-transactions]))
   (fn [db [_ {:keys [id message_id args]}]]
     (let [{:keys [from to value]} args]
       (if (valid-hex? to)
@@ -154,8 +154,8 @@
                 (dispatch [::check-completed-transaction!
                            {:message-id message-id}])
                 (case modal
-                  :confirm             (dispatch [:navigate-back])
-                  :transaction-details (dispatch [:navigate-to-modal :confirm])
+                  :pending-transactions (dispatch [:navigate-back])
+                  :transaction-details  (dispatch [:navigate-to-modal :pending-transactions])
                   nil))
             (dispatch [::remove-transaction id])))))))
 

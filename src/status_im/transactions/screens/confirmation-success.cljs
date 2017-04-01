@@ -4,11 +4,11 @@
             [status-im.components.confirm-button :as confirm-button]
             [status-im.components.status-bar :as status-bar]
             [status-im.transactions.views.list-item :as transactions-list-item]
-            [status-im.transactions.styles :as st]
+            [status-im.transactions.styles.screens :as st]
             [status-im.i18n :as i18n]))
 
 (defn confirmation-success [quantity]
-  [rn/view st/success-screen
+  [rn/view {:style st/success-screen}
    [status-bar/status-bar {:type :transparent}]
    [rn/view {:style st/success-screen-content-container}
     [rn/view {:style st/success-icon-container}
