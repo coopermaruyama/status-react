@@ -18,9 +18,11 @@
     :nav-action       (act/close-white #(do (rf/dispatch [:deny-transactions])
                                             (rf/dispatch [:navigate-back])))
     :custom-content   [rn/view {:style st/toolbar-title-container}
-                       [rn/text {:style st/toolbar-title-text}
+                       [rn/text {:style st/toolbar-title-text
+                                 :font :toolbar-title}
                         (i18n/label :t/pending-transactions)]
-                       [rn/text {:style st/toolbar-title-count}
+                       [rn/text {:style st/toolbar-title-count
+                                 :font :toolbar-title}
                         (count transactions)]]}])
 
 (defn render-row-fn [row _ _]

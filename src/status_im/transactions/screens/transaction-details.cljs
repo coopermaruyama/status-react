@@ -2,6 +2,7 @@
   (:require-macros [status-im.utils.views :refer [defview]])
   (:require [re-frame.core :as rf]
             [status-im.components.react :as rn]
+            [status-im.components.common.common :as common]
             [status-im.components.confirm-button :as confirm-button]
             [status-im.components.status-bar :as status-bar]
             [status-im.components.toolbar-new.actions :as act]
@@ -26,7 +27,7 @@
 
 (defn detail-data [content]
   [rn/view {:style st/details-data}
-   [rn/text {:style st/details-item-title} (i18n/label :t/data)]
+   [rn/text {:style st/details-data-title} (i18n/label :t/data)]
    [rn/text {:style st/details-data-content} "0xf8sd9fsd98f9dsf98dsf90xf8sd9fsd98f9dsf98dsf90xf8sd9fsd98f9dsf98dsf90xf8sd9fsd98f9dsf98dsf90xf8sd9fsd98f9dsf98dsf90xf8sd9fsd98f9dsdsf9"]])
 
 (defview details [{:keys [from to data gas gas-price] :as transaction}]
@@ -50,8 +51,9 @@
   [rn/view {:style st/transactions-screen}
    [status-bar/status-bar {:type :transparent}]
    [toolbar-view]
-   [scroll-view st/details-screen-content-container
+   [rn/scroll-view st/details-screen-content-container
     [transactions-list-item/view transaction #(rf/dispatch [:navigate-to-modal :pending-transactions])]
+    [common/separator {} st/details-separator]
     [details transaction]]
    (when confirmed? [password-form/view 1])
    (let [confirm-text (if confirmed?

@@ -39,21 +39,29 @@
 
 ;; transaction-details
 
-(def details-screen-content-container
-  {:flex        1
-   :padding-top 8})
+(defstyle details-screen-content-container
+  {:flex    1
+   :android {:padding-top 8}})
+
+(def details-separator
+  {:margin-bottom 10
+   :margin-left   16
+   :opacity       0.1})
 
 (def details-item
   {:margin-top     10
    :padding-left   16
    :flex-direction :row})
 
-(def details-item-title
-  {:width        80
-   :margin-right 24
-   :font-size    15
-   :color        st/color-white
-   :opacity      0.2})
+(defstyle details-item-title
+  {:width     80
+   :font-size 15
+   :color     st/color-white
+   :android   {:opacity      0.2
+               :margin-right 24}
+   :ios       {:opacity      0.5
+               :margin-right 8
+               :text-align   :right}})
 
 (defn details-item-content [name?]
   {:font-size 15
@@ -63,11 +71,17 @@
   {:font-size 15
    :color     st/color-light-blue})
 
-(def details-data
+(defstyle details-data
   {:margin-top       16
    :padding          16
-   :padding-right    48
-   :background-color st/color-dark-blue-3})
+   :background-color st/color-dark-blue-3
+   :ios              {:margin-horizontal 16}})
+
+(defstyle details-data-title
+  {:font-size 15
+   :color     st/color-white
+   :android   {:opacity 0.2}
+   :ios       {:opacity 0.5}})
 
 (def details-data-content
   {:font-size  15
