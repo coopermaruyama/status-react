@@ -112,10 +112,10 @@
           nil)))))
 
 (register-sub
-  :command-complete?
+  :command-completion
   (fn [db [_ chat-id]]
     (reaction
-      (input-model/command-complete? @db chat-id))))
+      (input-model/command-completion @db chat-id))))
 
 (register-sub
   :show-suggestions?

@@ -45,7 +45,8 @@
         [icon :close_gray style/close-commands-list-icon]
         [icon :input_list style/commands-list-icon])]]]
    [scroll-view {:horizontal                     true
-                 :showsHorizontalScrollIndicator false}
+                 :showsHorizontalScrollIndicator false
+                 :keyboardShouldPersistTaps      true}
     [view style/commands
      (for [[index [command-key command]] (map-indexed vector commands)]
        ^{:key command-key}
@@ -97,7 +98,7 @@
             [text-input
              {:ref                    #(dispatch [:set-chat-ui-props :input-ref %])
               :accessibility-label    id/chat-message-input
-              :blur-on-submit         true
+              :blur-on-submit         false
               :multiline              true
               :default-value          (or @modified-text @input-text "")
               :editable               (not @sending-in-progress?)
@@ -143,13 +144,14 @@
                 [icon :close_gray style/input-clear-icon]]])]))})))
 
 (defview input-container [{:keys [anim-margin]}]
-  [command-complete? [:command-complete?]
+  [command-completion [:command-completion]
    selected-command [:selected-chat-command]
    input-text [:chat :input-text]]
   [view style/input-container
    [input-view {:anim-margin anim-margin}]
    (when (and (not (str/blank? input-text))
-              (or command-complete? (not selected-command)))
+              (or (not selected-command)
+                  (some #{:complete :less-than-needed} [command-completion])))
      [touchable-highlight {:on-press #(do (dispatch [:set-chat-ui-props :sending-in-progress? true])
                                           (dispatch [:send-current-message]))}
       [view style/send-message-container

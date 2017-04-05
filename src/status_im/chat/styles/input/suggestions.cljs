@@ -1,4 +1,5 @@
 (ns status-im.chat.styles.input.suggestions
+  (:require-macros [status-im.utils.styles :refer [defnstyle]])
   (:require [status-im.components.styles :as common]))
 
 (def color-item-title-text "rgb(147, 155, 161)")
@@ -15,13 +16,13 @@
   {:font-size 14
    :color     color-item-title-text})
 
-(defn item-suggestion-container [border?]
-  {:flex-direction      :row
-   :align-items         :center
-   :height              56
-   :margin-left         16
-   :border-bottom-color color-item-border
-   :border-bottom-width (if border? 1 0)})
+(defnstyle item-suggestion-container [last?]
+  {:flex-direction :row
+   :align-items    :center
+   :height         56
+   :margin-left    16
+   :ios            {:border-bottom-color color-item-border
+                    :border-bottom-width (if last? 0 1)}})
 
 (def item-suggestion-name
   {:background-color color-item-suggestion-name

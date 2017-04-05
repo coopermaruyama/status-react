@@ -85,18 +85,30 @@
         chat-command     (selected-chat-command db chat-id)]
     (current-chat-argument-position chat-command input-text)))
 
-(defn command-complete?
+(defn command-completion
   ([{:keys [current-chat-id] :as db} chat-id]
    (let [chat-id             (or chat-id current-chat-id)
          input-text          (get-in db [:chats chat-id :input-text])
          chat-command        (selected-chat-command db chat-id)]
-     (command-complete? chat-command)))
+     (command-completion chat-command)))
   ([{:keys [args] :as chat-command}]
    (let [params          (get-in chat-command [:command :params])
          required-params (remove :optional params)]
-     (and chat-command
-          (or (= (count args) (count params))
-              (= (count args) (count required-params)))))))
+     (if chat-command
+       (cond
+         (or (= (count args) (count params))
+             (= (count args) (count required-params)))
+         :complete
+
+         (< (count args) (count required-params))
+         :less-than-needed
+
+         (> (count args) (count params))
+         :more-than-needed
+
+         :default
+         :no-command)
+       :no-command))))
 
 (defn args->params [{:keys [command args]}]
   (let [params (:params command)]

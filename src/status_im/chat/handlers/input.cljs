@@ -239,7 +239,7 @@
       (let [chat-id      (or chat-id current-chat-id)
             chat-command (input-model/selected-chat-command db chat-id)]
         (if chat-command
-          (if (input-model/command-complete? chat-command)
+          (if (= :complete (input-model/command-completion chat-command))
             (dispatch [::proceed-command chat-command chat-id])
             (let [text (get-in db [:chats chat-id :input-text])]
               (dispatch [:set-chat-ui-props :sending-in-progress? false])

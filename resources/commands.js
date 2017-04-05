@@ -1,11 +1,11 @@
 I18n.translations = {
     en: {
         location_title: 'Location',
-        location_description: 'Share your location',
+        location_description: 'Send location',
         location_address: 'Address',
 
         browse_title: 'Browser',
-        browse_description: 'Launch the browser',
+        browse_description: 'Open web browser',
 
         send_title: 'Send ETH',
         send_description: 'Send a payment',
@@ -717,7 +717,7 @@ status.command({
     description: I18n.t('browse_description'),
     params: [{
         name: "url",
-        placeholder: "url",
+        placeholder: "URL",
         type: status.types.TEXT
     }],
     onSend: function (params, context) {

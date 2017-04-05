@@ -1,7 +1,7 @@
 I18n.translations = {
     en: {
         browse_title: 'Browser',
-        browse_description: 'Launch the browser'
+        browse_description: 'Open web browser'
     }
 };
 

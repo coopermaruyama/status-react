@@ -1813,10 +1813,10 @@ status.command({
 status.command({
     name: "browse",
     title: "Browser",
-    description: "Launch the browser",
+    description: "Open web browser",
     params: [{
         name: "url",
-        placeholder: "url",
+        placeholder: "URL",
         type: status.types.TEXT
     }],
     onSend: function (params, context) {
