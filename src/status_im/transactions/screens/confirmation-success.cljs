@@ -1,4 +1,5 @@
 (ns status-im.transactions.screens.confirmation-success
+  (:require-macros [status-im.utils.views :refer [defview]])
   (:require [re-frame.core :as rf]
             [status-im.components.react :as rn]
             [status-im.components.sticky-button :as sticky-button]
@@ -7,7 +8,8 @@
             [status-im.transactions.styles.screens :as st]
             [status-im.i18n :as i18n]))
 
-(defn confirmation-success [quantity]
+(defview confirmation-success []
+  [quantity [:get :confirmed-transactions-count]]
   [rn/view {:style st/success-screen}
    [status-bar/status-bar {:type :transparent}]
    [rn/view {:style st/success-screen-content-container}
@@ -19,4 +21,5 @@
       (i18n/label-pluralize quantity :t/transactions-confirmed)]]]
    [sticky-button/sticky-button
     (i18n/label :t/got-it)
-    #(rf/dispatch [:navigate-back])]])
+    #(do (rf/dispatch [:navigate-back])
+         (rf/dispatch [:set :confirmed-transactions-count 0]))]])

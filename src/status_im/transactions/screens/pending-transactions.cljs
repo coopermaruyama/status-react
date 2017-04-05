@@ -49,6 +49,7 @@
                         (i18n/label :t/confirm)
                         (i18n/label-pluralize (count transactions) :t/confirm-transactions))
          confirm-fn   (if confirmed?
-                        #(rf/dispatch [:accept-transactions password])
+                        #(do (rf/dispatch [:accept-transactions password])
+                             (rf/dispatch [:set :confirmed-transactions-count (count transactions)]))
                         #(rf/dispatch [:set-in [:transactions-list-ui-props :confirmed?] true]))]
      [sticky-button/sticky-button confirm-text confirm-fn])])
