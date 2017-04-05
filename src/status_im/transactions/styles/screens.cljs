@@ -51,6 +51,7 @@
 (def details-item
   {:margin-top     10
    :padding-left   16
+   :padding-right  16
    :flex-direction :row})
 
 (defstyle details-item-title
@@ -64,12 +65,9 @@
                :text-align   :right}})
 
 (defn details-item-content [name?]
-  {:font-size 15
-   :color     (if name? st/color-light-blue st/color-white)})
-
-(def details-item-name-content
-  {:font-size 15
-   :color     st/color-light-blue})
+  {:font-size   15
+   :flex-shrink 1
+   :color       (if name? st/color-light-blue st/color-white)})
 
 (defstyle details-data
   {:margin-top       16
