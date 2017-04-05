@@ -31,18 +31,14 @@
 (defn detail-data [content]
   [rn/view {:style st/details-data}
    [rn/text {:style st/details-data-title} (i18n/label :t/data)]
-   [rn/text {:style st/details-data-content} "0xf8sd9fsd98f9dsf98dsf90xf8sd9fsd98f9dsf98dsf90xf8sd9fsd98f9dsf98dsf90xf8sd9fsd98f9dsf98dsf90xf8sd9fsd98f9dsf98dsf90xf8sd9fsd98f9dsdsf9"]])
+   [rn/text {:style st/details-data-content} content]])
 
 (defview details [{:keys [to data] :as transaction}]
   [current-account [:get-current-account]
    recipient       [:contact-by-address to]]
   [rn/view
    [detail-item (i18n/label :t/to) (:name recipient) true]
-   [detail-item (i18n/label :t/est-fee) "0.00232 ETH" false]
-   [detail-item (i18n/label :t/max-fee) "0" false]
-   [detail-item (i18n/label :t/gas-price) "0.02 per million gas" false]
-   [detail-data data]])
-   [detail-item (i18n/label :t/from) (:name current-account) true]
+   [detail-item (i18n/label :t/from) (:name current-account) true]])
 
 (defview transaction-details []
   [{:keys [id] :as transaction} [:get :selected-transaction]

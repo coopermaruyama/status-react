@@ -288,9 +288,6 @@
    :value                                 "Value"
    :to                                    "To"
    :from                                  "From"
-   :est-fee                               "Est. fee"
-   :max-fee                               "Max. fee"
-   :gas-price                             "Gas price"
    :data                                  "Data"
    :got-it                                "Got it"
 
