@@ -2,7 +2,7 @@
   (:require-macros [status-im.utils.views :refer [defview]])
   (:require [re-frame.core :as rf]
             [status-im.components.react :as rn]
-            [status-im.components.confirm-button :as confirm-button]
+            [status-im.components.sticky-button :as sticky-button]
             [status-im.components.status-bar :as status-bar]
             [status-im.components.toolbar-new.actions :as act]
             [status-im.components.toolbar-new.view :as toolbar]
@@ -51,4 +51,4 @@
          confirm-fn   (if confirmed?
                         #(rf/dispatch [:accept-transactions password])
                         #(rf/dispatch [:set-in [:transactions-list-ui-props :confirmed?] true]))]
-     [confirm-button/confirm-button confirm-text confirm-fn])])
+     [sticky-button/sticky-button confirm-text confirm-fn])])

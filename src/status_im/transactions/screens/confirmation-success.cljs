@@ -1,7 +1,7 @@
 (ns status-im.transactions.screens.confirmation-success
   (:require [re-frame.core :as rf]
             [status-im.components.react :as rn]
-            [status-im.components.confirm-button :as confirm-button]
+            [status-im.components.sticky-button :as sticky-button]
             [status-im.components.status-bar :as status-bar]
             [status-im.transactions.views.list-item :as transactions-list-item]
             [status-im.transactions.styles.screens :as st]
@@ -17,6 +17,6 @@
     [rn/view
      [rn/text {:style st/success-text}
       (i18n/label-pluralize quantity :t/transactions-confirmed)]]]
-   [confirm-button/confirm-button
+   [sticky-button/sticky-button
     (i18n/label :t/got-it)
     #(rf/dispatch [:navigate-back])]])
