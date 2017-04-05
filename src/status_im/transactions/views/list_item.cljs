@@ -4,15 +4,19 @@
             [clojure.string :as string]
             [status-im.utils.identicon :as identicon]
             [status-im.components.react :as rn]
+            [status-im.resources :as resources]
             [status-im.transactions.styles.list-item :as st]
             [status-im.i18n :as i18n]))
 
-(defn item-image [recipient]
-  (let [photo-path (:photo-path recipient)]
+(defview item-image [recipient]
+  [photo-path [:photo-path (:whisper-identity recipient)]]
+  (let [photo (if (string/starts-with? photo-path "contacts://")
+                (->> (string/replace photo-path #"contacts://" "")
+                     (keyword)
+                     (get resources/contacts))
+                {:uri photo-path})]
     [rn/view {:style st/item-photo}
-     [rn/image {:source {:uri (if (string/blank? photo-path)
-                                (identicon/identicon (:identity recipient))
-                                photo-path)}
+     [rn/image {:source photo
                 :style  st/photo}]
      [rn/image {:source {:uri :icon_arrow_left_white}
                 :style  st/item-photo-icon}]]))
